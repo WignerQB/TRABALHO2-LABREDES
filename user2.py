@@ -1,3 +1,5 @@
+#ESTE PROGRAMA RODA NA MÁQUINA G1
+
 import socket
 import pickle
 import time
