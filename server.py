@@ -1,24 +1,34 @@
-#servidor-tcp.py
+
 import socket
-import pickle
+import os
+from _thread import *
 
-HOST = '127.0.0.1' # Endereco IP do Servidor
-PORT = 5000 # Porta que o Servidor esta
-SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-SOCKET.bind((HOST, PORT))
-SOCKET.listen(1)
+ServerSocket = socket.socket()
+HOST = '127.0.0.1'
+PORT = 1233
+CONTADOR = 0
+try:
+    ServerSocket.bind((HOST, PORT))
+except socket.error as e:
+    print(str(e))
 
-REC = []
+print('Conectando...')
+ServerSocket.listen(5)
+
+
+def clients(connection):
+    while True:
+        data = connection.recv(2048)
+        reply = 'Server Says: ' + data.decode('utf-8')
+        if not data:
+            break
+        connection.sendall(str.encode(reply))
+    connection.close()
 
 while True:
-    CON, CLIENT = SOCKET.accept()
-    print('Conectado com', CLIENT)
-    while True:
-        DADOS = CON.recv(1024)
-        if DADOS == b'': 
-            break
-        REC.append(DADOS)
-        MSG = pickle.loads(b''.join(REC))
-        print(CLIENT, MSG)
-    print('Finalizando conexao do cliente', CLIENT)
-    CON.close()
+    Client, address = ServerSocket.accept()
+    print('Conectado em: ' + address[0] + ':' + str(address[1]))
+    start_new_thread(clients, (Client, ))
+    CONTADOR += 1
+    #print('Thread Number: ' + str(ThreadCount))
+ServerSocket.close()
