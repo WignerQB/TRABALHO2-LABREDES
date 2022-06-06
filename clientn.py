@@ -16,12 +16,12 @@ print("Exemplo: C1$Ola Mundo!")
 
 Response = ClientSocket.recv(1024)
 
-def exibirMSG(ClientSocket)
+def exibirMSG(CSocket):
     while True:
-        Response = ClientSocket.recv(1024)
+        Response = CSocket.recv(1024)
         print(Response.decode('utf-8'))
 
-def enviarMSG(ClientSocket)
+def enviarMSG(CSocket):
     MSG = input('Eu: ')
     VETORMSG = MSG.split("$")
     try:
@@ -29,7 +29,7 @@ def enviarMSG(ClientSocket)
     except:
         ind = -1
     if ind ==  -1 and len(VETORMSG) > 1:
-        ClientSocket.send(str.encode(MSG))
+        CSocket.send(str.encode(MSG))
     else:
         print("Mensagem inválida!")
 
