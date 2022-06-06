@@ -19,26 +19,23 @@ CLIENTS_CONECTADOS = []
 CONEXOES = dict()
 
 def clients(SELFconnection, CONEXOES):
-    #SELFconnection.send(str.encode('Conectado!'))
-    #print(CLIENTS_CONECTADOS)
+    SELFconnection.send(str.encode('Conectado!'))
     while True:
         data = SELFconnection.recv(2048)
         data = data.decode('utf-8')
         try:
-            data = data.split("$")
-            #print(data[0])
-            if data[0] == "C1":
+            MSG = data.split("$")
+            if MSG[0] == "C1":
                 DEST = '192.168.124.1'
-            elif data[0] == "G1":
+            elif MSG[0] == "G1":
                 DEST = '192.168.124.2'
-            elif data[0] == "G2":
+            elif MSG[0] == "G2":
                 DEST = '192.168.124.18'
             DESTSOCKET = CONEXOES[DEST]
-            print(SELFconnection)
             print(DESTSOCKET)
-            #DESTSOCKET = SELFconnection
-            DESTSOCKET.send(str.encode(' '))
-            reply =  data[1]
+            print(MSG[1])
+            DESTSOCKET.send(str.encode(MSG[1]))
+            reply =  MSG[1]
             if not data:
                 break
             DESTSOCKET.sendall(str.encode(reply))
