@@ -18,6 +18,7 @@ Response = ClientSocket.recv(1024)
 
 def exibirMSG(CSocket):
     while True:
+        print('Eu: ')
         Response = CSocket.recv(1024)
         print(Response.decode('utf-8'))
 
