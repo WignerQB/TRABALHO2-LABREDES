@@ -18,13 +18,12 @@ Response = ClientSocket.recv(1024)
 
 def exibirMSG(CSocket):
     while True:
-        print('Eu: ')
         Response = CSocket.recv(1024)
         print(Response.decode('utf-8'))
 
 def enviarMSG(CSocket):
     while True:
-        MSG = input('Eu: ')
+        MSG = input('')
         VETORMSG = MSG.split("$")
         try:
             ind = VETORMSG[0].index("G10")
