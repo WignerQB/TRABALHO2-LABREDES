@@ -15,6 +15,10 @@ print("Exemplo: C1$Ola Mundo!")
 
 Response = ClientSocket.recv(1024)
 while True:
+    
+    Response = ClientSocket.recv(1024)
+    print(Response.decode('utf-8'))
+
     MSG = input('Eu: ')
     VETORMSG = MSG.split("$")
     try:
@@ -23,8 +27,6 @@ while True:
         ind = -1
     if ind ==  -1 and len(VETORMSG) > 1:
         ClientSocket.send(str.encode(MSG))
-        Response = ClientSocket.recv(1024)
-        print(Response.decode('utf-8'))
     else:
         print("Mensagem inválida!")
 
