@@ -16,12 +16,12 @@ print("Exemplo: C1$Ola Mundo!")
 
 Response = ClientSocket.recv(1024)
 
-def exibirMSG()
+def exibirMSG(ClientSocket)
     while True:
         Response = ClientSocket.recv(1024)
         print(Response.decode('utf-8'))
 
-def enviarMSG()
+def enviarMSG(ClientSocket)
     MSG = input('Eu: ')
     VETORMSG = MSG.split("$")
     try:
