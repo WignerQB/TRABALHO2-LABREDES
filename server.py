@@ -34,7 +34,7 @@ def clients(SELFconnection, CONEXOES):
             DESTSOCKET = CONEXOES[DEST]
             print(DESTSOCKET)
             print(MSG[1])
-            DESTSOCKET.send(str.encode(MSG[1]))
+            #DESTSOCKET.send(str.encode(MSG[1]))
             reply =  MSG[1]
             if not data:
                 break
