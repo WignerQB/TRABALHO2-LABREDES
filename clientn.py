@@ -23,16 +23,17 @@ def exibirMSG(CSocket):
         print(Response.decode('utf-8'))
 
 def enviarMSG(CSocket):
-    MSG = input('Eu: ')
-    VETORMSG = MSG.split("$")
-    try:
-        ind = VETORMSG[0].index("G10")
-    except:
-        ind = -1
-    if ind ==  -1 and len(VETORMSG) > 1:
-        CSocket.send(str.encode(MSG))
-    else:
-        print("Mensagem inválida!")
+    while True:
+        MSG = input('Eu: ')
+        VETORMSG = MSG.split("$")
+        try:
+            ind = VETORMSG[0].index("G10")
+        except:
+            ind = -1
+        if ind ==  -1 and len(VETORMSG) > 1:
+            CSocket.send(str.encode(MSG))
+        else:
+            print("Mensagem inválida!")
 
 
 
