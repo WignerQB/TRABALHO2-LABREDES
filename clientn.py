@@ -1,4 +1,5 @@
 import socket
+import _thread
 
 ClientSocket = socket.socket()
 host = '192.168.124.1'
@@ -14,11 +15,13 @@ print("As mensagens devem conter o destinatário no início e a mensagem logo ap
 print("Exemplo: C1$Ola Mundo!")
 
 Response = ClientSocket.recv(1024)
-while True:
-    
-    Response = ClientSocket.recv(1024)
-    print(Response.decode('utf-8'))
 
+def exibirMSG()
+    while True:
+        Response = ClientSocket.recv(1024)
+        print(Response.decode('utf-8'))
+
+def enviarMSG()
     MSG = input('Eu: ')
     VETORMSG = MSG.split("$")
     try:
@@ -30,4 +33,14 @@ while True:
     else:
         print("Mensagem inválida!")
 
-ClientSocket.close()
+
+
+try:
+    _thread.start_new_thread(exibirMSG, (ClientSocket,))
+    _thread.start_new_thread(enviarMSG, (ClientSocket,))
+except:
+    exit()
+    ClientSocket.close()
+
+while True:
+    pass
