@@ -18,7 +18,7 @@ ServerSocket.listen(2)
 CLIENTS_CONECTADOS = []
 CONEXOES = dict()
 
-def clients(SELFconnection, CONEXOES):
+def clients(SELFconnection, CONEXOES, REM):
     SELFconnection.send(str.encode('Conectado!'))
     while True:
         data = SELFconnection.recv(2048)
@@ -31,11 +31,12 @@ def clients(SELFconnection, CONEXOES):
                 DEST = '192.168.124.2'
             elif MSG[0] == "G2":
                 DEST = '192.168.124.18'
+            elif MSG[0] == "C2":
+                DEST = '192.168.124.34'
             DESTSOCKET = CONEXOES[DEST]
             print(DESTSOCKET)
             print(MSG[1])
-            #DESTSOCKET.send(str.encode(MSG[1]))
-            reply =  MSG[1]
+            reply =  REM + ": " + MSG[1]
             if not data:
                 break
             DESTSOCKET.sendall(str.encode(reply))
@@ -47,9 +48,17 @@ def clients(SELFconnection, CONEXOES):
 while True:
     Client, address = ServerSocket.accept()
     print('Conectado em: ' + address[0] + ':' + str(address[1]))
-    #start_new_thread(clients, (Client, ))
-    #print(Client)
-    start_new_thread(clients, (Client, CONEXOES, ))
+    
+    if address[0] == '192.168.124.1':
+        REM  = 'C1'
+    elif address[0] == '192.168.124.2':
+        REM = 'G1'
+    elif address[0] == '192.168.124.18':
+        REM = 'G2'
+    elif address[0] == '192.168.124.34':
+        REM = 'C2'
+
+    start_new_thread(clients, (Client, CONEXOES, REM, ))
     try:
         ind = CLIENTS_CONECTADOS.index(address[0])
     except:
@@ -58,8 +67,5 @@ while True:
         CLIENTS_CONECTADOS.append(address[0])
         CONEXOES[address[0]] = Client
         CONTADOR += 1
-    """print(" ")
-    print(CONEXOES)
-    print(" ")"""
     print('Número de clientes: ' + str(CONTADOR))
 ServerSocket.close()
