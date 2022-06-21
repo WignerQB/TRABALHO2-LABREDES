@@ -22,7 +22,7 @@ try:
 except socket.error as e:
     print(str(e))
 
-print("Eu sou ", MyName)
+print("Eu sou", MyName)
 
 print('Conectando...')
 ServerSocket.listen(2)

@@ -11,12 +11,21 @@ try:
 except socket.error as e:
     print(str(e))
 
-USER = input('Qual a sua maquina: C1, G1, G2 ou C2\n')
+"""USER = input('Qual a sua maquina: C1, G1, G2 ou C2\n')
 
 while True:
     if USER == 'C1' or USER == 'G1' or USER == 'G2' or USER == 'C2':
         break
-    NAME = input('Opcao errada!\n Digite novamente qual a sua maquina: C1, G1, G2 ou C2\n')
+    NAME = input('Opcao errada!\n Digite novamente qual a sua maquina: C1, G1, G2 ou C2\n')"""
+
+MyAddress = socket.gethostbyname(socket.gethostname())
+
+f = open('conf.json','r')
+data = json.load(f)
+for i in data['MyAddress']:
+    if MyAddress == data['MyAddress'][i]:
+        MyName = i
+f.close()
 
 
 print("As mensagens devem conter o destinatário no início e a mensagem logo após, com um $ separando")
@@ -35,7 +44,7 @@ def enviarMSG(CSocket):
         MSG = input('')
         VETORMSG = MSG.split("$")
         try:
-            ind = VETORMSG[0].index(USER)
+            ind = VETORMSG[0].index(MyName)
         except:
             ind = -1
         if ind ==  -1 and len(VETORMSG) > 1:
