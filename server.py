@@ -8,14 +8,17 @@ MyAddress = socket.gethostbyname(socket.gethostname())
 
 f = open('conf.json','r')
 data = json.load(f)
+HOST = data['Server']["HOST"]
+PORT = data['Server']["PORT"]
+#print(HOST, PORT)
+
 for i in data['MyAddress']:
     if MyAddress == data['MyAddress'][i]:
         MyName = i
 f.close()
 
 ServerSocket = socket.socket()
-HOST = '192.168.124.1'
-PORT = 1233
+
 CONTADOR = 0
 try:
     ServerSocket.bind((HOST, PORT))
@@ -23,7 +26,7 @@ except socket.error as e:
     print(str(e))
 
 print("Eu sou", MyName)
-
+print(" ")
 print('Conectando...')
 ServerSocket.listen(2)
 
