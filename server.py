@@ -2,6 +2,16 @@
 import socket
 import os
 from _thread import *
+import json
+
+MyAddress = socket.gethostbyname(socket.gethostname())
+
+f = open('conf.json','r')
+data = json.load(f)
+for i in data['MyAddress']:
+    if MyAddress == data['MyAddress'][i]:
+        MyName = i
+f.close()
 
 ServerSocket = socket.socket()
 HOST = '192.168.124.1'
@@ -11,6 +21,8 @@ try:
     ServerSocket.bind((HOST, PORT))
 except socket.error as e:
     print(str(e))
+
+print("Eu sou ", MyName)
 
 print('Conectando...')
 ServerSocket.listen(2)
@@ -48,7 +60,7 @@ def clients(SELFconnection, CONEXOES, REM):
 while True:
     Client, address = ServerSocket.accept()
     print('Conectado em: ' + address[0] + ':' + str(address[1]))
-    
+
     if address[0] == '192.168.124.1':
         REM  = 'C1'
     elif address[0] == '192.168.124.2':
@@ -69,3 +81,4 @@ while True:
         CONTADOR += 1
     print('Número de clientes: ' + str(CONTADOR))
 ServerSocket.close()
+
