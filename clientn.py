@@ -26,7 +26,7 @@ print("Exemplo: C1$Ola Mundo!")
 print("\n\n\n\n")
 
 Response = ClientSocket.recv(2048)
-print(Response)
+print(Response.decode('utf-8'))
 
 def exibirMSG(CSocket):
     while True:

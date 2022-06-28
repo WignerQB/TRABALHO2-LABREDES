@@ -3,12 +3,10 @@ import socket
 import os
 from _thread import *
 import json
+import pickle
 
 data = dict()
-CONEXOES = dict()
-CLIENTS_CONECTADOS = []
 ListaContatos = []
-IPS = []
 
 MyAddress = socket.gethostbyname(socket.gethostname())
 
@@ -16,7 +14,11 @@ f = open('conf.json','r')
 data = json.load(f)
 HOST = data['Server']["HOST"]
 PORT = data['Server']["PORT"]
+print(data)
 
+for i in data['AddressDest']:
+    if MyAddress == data['AddressDest'][i]:
+        MyName = i
 f.close()
 
 ServerSocket = socket.socket()
@@ -30,24 +32,18 @@ except socket.error as e:
 print('Conectando...')
 ServerSocket.listen(2)
 
+CLIENTS_CONECTADOS = []
+CONEXOES = dict()
 
-def InformarConectados(ListaContatos, CONEXOES, IPS):
-    TEXTO = "Lista de Contatos: \n"
-    for j in ListaContatos:
-        TEXTO = TEXTO + str(j) + "\n"
-    print("\n\n\n\n\n")
-    print(TEXTO)
-    #print(type(TEXTO))
-    for ips in IPS:
-        #print(CONEXOES[ips])
-        CONEXOES[ips].send(str.encode(TEXTO))
+def InformarConectados(ListaContatos, CONEXOES):
+    for con in CONEXOES:
+        Pacote = pickle.dumps(ListaContatos)
+        con.send(bytes(P))
 
 
-def clients(Client, IPREM, CONEXOES, IPS, data):
-    REM = " "
-
-    Client.send(str.encode('Conectado!'))
-    Name = Client.recv(2048)
+def clients(SELFconnection, CONEXOES, REM, data):
+    SELFconnection.send(str.encode('Conectado!'))
+    Name = SELFconnection.recv(2048)
 
     Name = Name.decode('utf-8')
 
@@ -56,37 +52,42 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
     with open("conf.json", "w") as outfile:
         outfile.write(json_object)
 
+    file = open('conf.json','r')
+    data = json.load(file)
     ListaContatos = []
     for i in data["AddressDest"]:
             ListaContatos.append(i)
+    print("Lista de contatos: ")
+    print(ListaContatos)
+    print(" ")
 
-    InformarConectados(ListaContatos, CONEXOES, IPS)
-    Client.send(str.encode(' Canal aberto!'))
+    InformarConectados(ListaContatos, CONEXOES)
+
+    SELFconnection.send(str.encode(' Canal aberto!'))
     while True:
-        Mensagem = Client.recv(2048)
-        Mensagem = Mensagem.decode('utf-8')
-        print(Client)
-        with open("conf.json", encoding= 'utf-8') as ConfigFile:
-            data = json.load(ConfigFile)
-
-        for i in data['AddressDest']:
-            if IPREM == data['AddressDest'][i]:
-                REM = i
-
+        data = SELFconnection.recv(2048)
+        data = data.decode('utf-8')
         try:
-            MSG = Mensagem.split("$")
-            print("MSG: ", MSG)
-            DEST = data["AddressDest"][MSG[0]]
-
+            MSG = data.split("$")
+            if MSG[0] == "C1":
+                DEST = '192.168.124.1'
+            elif MSG[0] == "G1":
+                DEST = '192.168.124.2'
+            elif MSG[0] == "G2":
+                DEST = '192.168.124.18'
+            elif MSG[0] == "C2":
+                DEST = '192.168.124.34'
             DESTSOCKET = CONEXOES[DEST]
-            reply =  REM + ">>> " + MSG[1]
+            print(DESTSOCKET)
+            print(MSG[1])
+            reply =  REM + ": " + MSG[1]
             if not data:
                 break
             DESTSOCKET.sendall(str.encode(reply))
         except:
             pass
     DESTSOCKET.close()
-    Client.close()
+    SELFconnection.close()
 
 while True:
     Client, address = ServerSocket.accept()
@@ -94,6 +95,9 @@ while True:
 
     HOST = data['Server']["HOST"]
 
+
+    REM = "X"
+    start_new_thread(clients, (Client, CONEXOES, REM, data, ))
     try:
         ind = CLIENTS_CONECTADOS.index(address[0])
     except:
@@ -101,10 +105,7 @@ while True:
     if ind == -1 or CLIENTS_CONECTADOS == []:
         CLIENTS_CONECTADOS.append(address[0])
         CONEXOES[address[0]] = Client
-        IPS.append(address[0])
         CONTADOR += 1
     print('Número de clientes: ' + str(CONTADOR))
-    start_new_thread(clients, (Client, address[0], CONEXOES, IPS, data, ))
-
 ServerSocket.close()
 
