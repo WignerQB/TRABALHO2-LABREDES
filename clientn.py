@@ -12,12 +12,7 @@ try:
 except socket.error as e:
     print(str(e))
 
-"""USER = input('Qual a sua maquina: C1, G1, G2 ou C2\n')
-
-while True:
-    if USER == 'C1' or USER == 'G1' or USER == 'G2' or USER == 'C2':
-        break
-    NAME = input('Opcao errada!\n Digite novamente qual a sua maquina: C1, G1, G2 ou C2\n')"""
+Name = input("Digite o nome do usuário: ")
 
 MyAddress = socket.gethostbyname(socket.gethostname())
 
@@ -34,6 +29,7 @@ print("Exemplo: C1$Ola Mundo!")
 print("\n\n\n\n")
 
 Response = ClientSocket.recv(1024)
+ClientSocket.send(str.encode(Name))
 
 def exibirMSG(CSocket):
     while True:
