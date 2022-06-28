@@ -40,16 +40,7 @@ def exibirMSG(CSocket):
 def enviarMSG(CSocket):
     while True:
         MSG = input('')
-        VETORMSG = MSG.split(":")
-        try:
-            ind = VETORMSG[0].index(Name)
-        except:
-            ind = -1
-        if ind ==  -1 and len(VETORMSG) > 1:
-            print("entrei")
-            CSocket.send(str.encode(MSG))
-        else:
-            print("Mensagem inválida!")
+        CSocket.send(str.encode(MSG))
 
 
 try:
