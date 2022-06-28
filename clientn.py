@@ -59,4 +59,5 @@ while True:
         pass
     except KeyboardInterrupt:
         ClientSocket.close()
+        a = input("Encerrando conexão. Pressione qualquer tecla.")
         exit()
