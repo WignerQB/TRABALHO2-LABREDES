@@ -33,10 +33,24 @@ ServerSocket.listen(2)
 CLIENTS_CONECTADOS = []
 CONEXOES = dict()
 
-def clients(SELFconnection, CONEXOES, REM):
-    #SELFconnection.send(str.encode('Conectado!'))
+def clients(SELFconnection, CONEXOES, REM, data):
+    SELFconnection.send(str.encode('Conectado!'))
+    Name = SELFconnection.recv(2048)
+
+    Name = Name.decode('utf-8')
+
+    data["AddressDest"][Name] = address[0]
+    print(data)
+    json_object = json.dumps(data, indent = 4)
+    with open("conf.json", "w") as outfile:
+        outfile.write(json_object)
+
+    print("Antes do while")
+    SELFconnection.send(str.encode('Canal aberto!'))
     while True:
+        print("Dentro do while")
         data = SELFconnection.recv(2048)
+        print("Depois do recv")
         data = data.decode('utf-8')
         try:
             MSG = data.split("$")
@@ -63,21 +77,6 @@ def clients(SELFconnection, CONEXOES, REM):
 while True:
     Client, address = ServerSocket.accept()
     print('Conectado em: ' + address[0] + ':' + str(address[1]))
-    
-    Client.send(str.encode('Conectado!'))
-    while True:
-        Name = Client.recv(2048)
-        if not Name:
-            break
-    Name = Name.decode('utf-8')
-
-    X = "X" + str(CONTADOR+1)
-    #data.update({"AddressDest":{X:address[0]}})
-    data["AddressDest"][Name] = address[0]
-    print(data)
-    json_object = json.dumps(data, indent = 4)
-    with open("conf.json", "w") as outfile:
-        outfile.write(json_object)
 
     HOST = data['Server']["HOST"]
     """if address[0] == '192.168.124.1':
@@ -90,7 +89,7 @@ while True:
         REM = 'C2'"""
 
     REM = "X"
-    start_new_thread(clients, (Client, CONEXOES, REM, ))
+    start_new_thread(clients, (Client, CONEXOES, REM, data, ))
     try:
         ind = CLIENTS_CONECTADOS.index(address[0])
     except:
