@@ -46,11 +46,10 @@ def enviarMSG(CSocket):
         except:
             ind = -1
         if ind ==  -1 and len(VETORMSG) > 1:
+            print("entrei")
             CSocket.send(str.encode(MSG))
         else:
             print("Mensagem inválida!")
-
-
 
 
 try:
@@ -60,6 +59,7 @@ except KeyboardInterrupt:
     ClientSocket.send(str.encode("Desconectar"))
     time.sleep(1)
     ClientSocket.close()
+    _thread.interrupt_main()
     sys.exit()
 
 while True:
