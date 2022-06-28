@@ -66,10 +66,9 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
     while True:
         Mensagem = Client.recv(2048)
         Mensagem = Mensagem.decode('utf-8')
-
         with open("conf.json", encoding= 'utf-8') as ConfigFile:
             data = json.load(ConfigFile)
-        #print(Mensagem)
+        print(Mensagem)
         time.sleep(1)
         if Mensagem == "Desconectar":
             del data["AddressDest"][REM]
@@ -89,7 +88,7 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
 
             DESTSOCKET = CONEXOES[DEST]
             reply = "(" + REM + ") >>> " + MSG[1]
-            if Mensagem == None:
+            if Mensagem == '':
                 print("Entrei")
                 Client.close()
                 break
