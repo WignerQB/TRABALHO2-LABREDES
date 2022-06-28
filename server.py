@@ -34,9 +34,10 @@ ServerSocket.listen(2)
 
 
 def InformarConectados(ListaContatos, CONEXOES, IPS):
-    TEXTO = "Usuários Online:\n"
+    TEXTO = "\nUsuários Online:\n"
     for j in ListaContatos:
         TEXTO = TEXTO + str(j) + "\n"
+    TEXTO = TEXTO + "\n"
     for ips in IPS:
         CONEXOES[ips].send(str.encode(TEXTO))
 

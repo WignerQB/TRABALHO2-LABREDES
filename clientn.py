@@ -23,6 +23,7 @@ MyAddress = socket.gethostbyname(socket.gethostname())
 
 print("As mensagens devem conter o destinatário no início e a mensagem logo após, com um $ separando")
 print("Exemplo: C1:Ola Mundo!")
+print("Para sair digite: SAIR")
 print("\n\n\n\n")
 
 Response = ClientSocket.recv(2048)
@@ -42,7 +43,7 @@ def enviarMSG(CSocket):
     while True:
         try:
             MSG = input('')
-            if MSG == '\x03':
+            if MSG == "SAIR":
                 CSocket.close()
                 a = input("Encerrando conexão. Pressione qualquer tecla.")
                 exit()
