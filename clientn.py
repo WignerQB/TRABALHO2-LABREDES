@@ -33,34 +33,21 @@ print(Response.decode('utf-8'))
 
 def exibirMSG(CSocket):
     while True:
-        try:
-            Response = CSocket.recv(2048)
-            print(Response.decode('utf-8'))
-        except KeyboardInterrupt:
-            CSocket.close()
-            ClientSocket.close()
-            quit()
-            sys.exit()
-            break
-
+        Response = CSocket.recv(2048)
+        print(Response.decode('utf-8'))
 
 def enviarMSG(CSocket):
     while True:
+        MSG = input('')
+        VETORMSG = MSG.split(":")
         try:
-            MSG = input('')
-            VETORMSG = MSG.split(":")
-            try:
-                ind = VETORMSG[0].index(Name)
-            except:
-                ind = -1
-            if ind ==  -1 and len(VETORMSG) > 1:
-                CSocket.send(str.encode(MSG))
-            else:
-                print("Mensagem inválida!")
-        except KeyboardInterrupt:
-            CSocket.close()
-            sys.exit()
-            break
+            ind = VETORMSG[0].index(Name)
+        except:
+            ind = -1
+        if ind ==  -1 and len(VETORMSG) > 1:
+            CSocket.send(str.encode(MSG))
+        else:
+            print("Mensagem inválida!")
 
 
 
@@ -68,13 +55,6 @@ def enviarMSG(CSocket):
 try:
     _thread.start_new_thread(exibirMSG, (ClientSocket,))
     _thread.start_new_thread(enviarMSG, (ClientSocket,))
-except:
+except KeyboardInterrupt:
     ClientSocket.close()
-
-while True:
-    try:
-        pass
-    except KeyboardInterrupt:
-        ClientSocket.close()
-        sys.exit()
-        break
+    sys.exit()
