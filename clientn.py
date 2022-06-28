@@ -22,7 +22,7 @@ MyAddress = socket.gethostbyname(socket.gethostname())
 
 
 print("As mensagens devem conter o destinatário no início e a mensagem logo após, com um $ separando")
-print("Exemplo: C1$Ola Mundo!")
+print("Exemplo: C1:Ola Mundo!")
 print("\n\n\n\n")
 
 Response = ClientSocket.recv(2048)
@@ -36,7 +36,7 @@ def exibirMSG(CSocket):
 def enviarMSG(CSocket):
     while True:
         MSG = input('')
-        VETORMSG = MSG.split("$")
+        VETORMSG = MSG.split(":")
         try:
             ind = VETORMSG[0].index(Name)
         except:

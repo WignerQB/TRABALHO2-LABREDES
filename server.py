@@ -32,7 +32,7 @@ ServerSocket.listen(2)
 
 
 def InformarConectados(ListaContatos, CONEXOES, IPS):
-    TEXTO = "Lista de Contatos: \n"
+    TEXTO = "Usuários Online:\n"
     for j in ListaContatos:
         TEXTO = TEXTO + str(j) + "\n"
     print("\n\n\n\n\n")
@@ -61,7 +61,7 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
             ListaContatos.append(i)
 
     InformarConectados(ListaContatos, CONEXOES, IPS)
-    Client.send(str.encode(' Canal aberto!'))
+    Client.send(str.encode('Canal aberto!'))
     while True:
         Mensagem = Client.recv(2048)
         Mensagem = Mensagem.decode('utf-8')
@@ -74,12 +74,12 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
                 REM = i
 
         try:
-            MSG = Mensagem.split("$")
+            MSG = Mensagem.split(":")
             print("MSG: ", MSG)
             DEST = data["AddressDest"][MSG[0]]
 
             DESTSOCKET = CONEXOES[DEST]
-            reply =  REM + ">>> " + MSG[1]
+            reply = "(" + REM + ") >>> " + MSG[1]
             if not data:
                 break
             DESTSOCKET.sendall(str.encode(reply))
