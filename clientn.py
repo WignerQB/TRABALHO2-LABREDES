@@ -52,8 +52,11 @@ try:
     _thread.start_new_thread(exibirMSG, (ClientSocket,))
     _thread.start_new_thread(enviarMSG, (ClientSocket,))
 except:
-    exit()
     ClientSocket.close()
 
 while True:
-    pass
+    try:
+        pass
+    except KeyboardInterrupt:
+        ClientSocket.close()
+        exit()
