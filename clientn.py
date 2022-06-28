@@ -2,40 +2,35 @@ import socket
 import _thread
 import json
 
+f = open('conf.json','r')
+data = json.load(f)
+HOST = data['Server']["HOST"]
+PORT = data['Server']["PORT"]
+
 ClientSocket = socket.socket()
-host = '192.168.124.1'
-port = 1233
 
 print('Waiting for connection')
 try:
-    ClientSocket.connect((host, port))
+    ClientSocket.connect((HOST, PORT))
 except socket.error as e:
     print(str(e))
 
 Name = input("Digite o nome do usuário: ")
-#ClientSocket.send(str.encode(Name))
+ClientSocket.send(str.encode(Name))
 
 MyAddress = socket.gethostbyname(socket.gethostname())
-
-"""f = open('conf.json','r')
-data = json.load(f)
-for i in data['MyAddress']:
-    if MyAddress == data['MyAddress'][i]:
-        MyName = i
-f.close()"""
-
 
 
 print("As mensagens devem conter o destinatário no início e a mensagem logo após, com um $ separando")
 print("Exemplo: C1$Ola Mundo!")
 print("\n\n\n\n")
 
-Response = ClientSocket.recv(1024)
-ClientSocket.send(str.encode(Name))
+Response = ClientSocket.recv(2048)
+print(Response)
 
 def exibirMSG(CSocket):
     while True:
-        Response = CSocket.recv(1024)
+        Response = CSocket.recv(2048)
         print(Response.decode('utf-8'))
 
 def enviarMSG(CSocket):
