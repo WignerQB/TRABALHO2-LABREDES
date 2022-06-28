@@ -65,7 +65,10 @@ while True:
     print('Conectado em: ' + address[0] + ':' + str(address[1]))
     
     Client.send(str.encode('Conectado!'))
-    Name = Client.recv(2048)
+    while True:
+        Name = Client.recv(2048)
+        if not Name:
+            break
     Name = Name.decode('utf-8')
 
     X = "X" + str(CONTADOR+1)

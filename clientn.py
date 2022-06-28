@@ -13,15 +13,17 @@ except socket.error as e:
     print(str(e))
 
 Name = input("Digite o nome do usuário: ")
+#ClientSocket.send(str.encode(Name))
 
 MyAddress = socket.gethostbyname(socket.gethostname())
 
-f = open('conf.json','r')
+"""f = open('conf.json','r')
 data = json.load(f)
 for i in data['MyAddress']:
     if MyAddress == data['MyAddress'][i]:
         MyName = i
-f.close()
+f.close()"""
+
 
 
 print("As mensagens devem conter o destinatário no início e a mensagem logo após, com um $ separando")
@@ -41,7 +43,7 @@ def enviarMSG(CSocket):
         MSG = input('')
         VETORMSG = MSG.split("$")
         try:
-            ind = VETORMSG[0].index(MyName)
+            ind = VETORMSG[0].index(Name)
         except:
             ind = -1
         if ind ==  -1 and len(VETORMSG) > 1:
