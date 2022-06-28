@@ -3,6 +3,7 @@ import _thread
 import json
 import sys
 import os
+import time
 
 f = open('conf.json','r')
 data = json.load(f)
@@ -56,5 +57,10 @@ try:
     _thread.start_new_thread(exibirMSG, (ClientSocket,))
     _thread.start_new_thread(enviarMSG, (ClientSocket,))
 except KeyboardInterrupt:
+    ClientSocket.send(str.encode("Desconectar"))
+    time.sleep(1)
     ClientSocket.close()
     sys.exit()
+
+while True:
+    pass
