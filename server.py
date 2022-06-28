@@ -4,6 +4,7 @@ import os
 from _thread import *
 import json
 import sys
+import time
 
 data = dict()
 RESETdata = dict()
@@ -65,9 +66,18 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
     while True:
         Mensagem = Client.recv(2048)
         Mensagem = Mensagem.decode('utf-8')
-        print(Client)
+
         with open("conf.json", encoding= 'utf-8') as ConfigFile:
             data = json.load(ConfigFile)
+        #print(Mensagem)
+        time.sleep(1)
+        if Mensagem == "Desconectar":
+            del data["AddressDest"][REM]
+            print(data["AddressDest"])
+            json_object = json.dumps(data, indent = 4)
+            with open("conf.json", "w") as outfile:
+                outfile.write(json_object)
+
 
         for i in data['AddressDest']:
             if IPREM == data['AddressDest'][i]:
@@ -75,12 +85,13 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
 
         try:
             MSG = Mensagem.split(":")
-            print("MSG: ", MSG)
             DEST = data["AddressDest"][MSG[0]]
 
             DESTSOCKET = CONEXOES[DEST]
             reply = "(" + REM + ") >>> " + MSG[1]
-            if not data:
+            if Mensagem == None:
+                print("Entrei")
+                Client.close()
                 break
             DESTSOCKET.sendall(str.encode(reply))
         except:
