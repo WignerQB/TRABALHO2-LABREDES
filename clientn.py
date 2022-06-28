@@ -1,6 +1,8 @@
 import socket
 import _thread
 import json
+import sys
+import os
 
 f = open('conf.json','r')
 data = json.load(f)
@@ -36,17 +38,16 @@ def exibirMSG(CSocket):
             print(Response.decode('utf-8'))
         except KeyboardInterrupt:
             CSocket.close()
-            a = input("Encerrando conexão. Pressione qualquer tecla.")
-            exit()
+            ClientSocket.close()
+            quit()
+            sys.exit()
+            break
+
 
 def enviarMSG(CSocket):
     while True:
         try:
             MSG = input('')
-            if MSG == "SAIR":
-                CSocket.close()
-                a = input("Encerrando conexão. Pressione qualquer tecla.")
-                exit()
             VETORMSG = MSG.split(":")
             try:
                 ind = VETORMSG[0].index(Name)
@@ -58,8 +59,8 @@ def enviarMSG(CSocket):
                 print("Mensagem inválida!")
         except KeyboardInterrupt:
             CSocket.close()
-            a = input("Encerrando conexão. Pressione qualquer tecla.")
-            exit()
+            sys.exit()
+            break
 
 
 
@@ -75,5 +76,5 @@ while True:
         pass
     except KeyboardInterrupt:
         ClientSocket.close()
-        a = input("Encerrando conexão. Pressione qualquer tecla.")
-        exit()
+        sys.exit()
+        break
