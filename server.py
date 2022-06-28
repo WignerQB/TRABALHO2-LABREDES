@@ -3,8 +3,10 @@ import socket
 import os
 from _thread import *
 import json
+import sys
 
 data = dict()
+RESETdata = dict()
 CONEXOES = dict()
 CLIENTS_CONECTADOS = []
 ListaContatos = []
@@ -35,15 +37,12 @@ def InformarConectados(ListaContatos, CONEXOES, IPS):
     TEXTO = "Usuários Online:\n"
     for j in ListaContatos:
         TEXTO = TEXTO + str(j) + "\n"
-    print("\n\n\n\n\n")
-    print(TEXTO)
-    #print(type(TEXTO))
     for ips in IPS:
-        #print(CONEXOES[ips])
         CONEXOES[ips].send(str.encode(TEXTO))
 
 
 def clients(Client, IPREM, CONEXOES, IPS, data):
+
     REM = " "
 
     Client.send(str.encode('Conectado!'))
@@ -58,7 +57,7 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
 
     ListaContatos = []
     for i in data["AddressDest"]:
-            ListaContatos.append(i)
+        ListaContatos.append(i)
 
     InformarConectados(ListaContatos, CONEXOES, IPS)
     Client.send(str.encode('Canal aberto!'))
@@ -89,6 +88,7 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
     Client.close()
 
 while True:
+
     Client, address = ServerSocket.accept()
     print('Conectado em: ' + address[0] + ':' + str(address[1]))
 
@@ -106,5 +106,5 @@ while True:
     print('Número de clientes: ' + str(CONTADOR))
     start_new_thread(clients, (Client, address[0], CONEXOES, IPS, data, ))
 
-ServerSocket.close()
+#ServerSocket.close()
 
