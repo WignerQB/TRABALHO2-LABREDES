@@ -30,21 +30,32 @@ print(Response.decode('utf-8'))
 
 def exibirMSG(CSocket):
     while True:
-        Response = CSocket.recv(2048)
-        print(Response.decode('utf-8'))
+        try:
+            Response = CSocket.recv(2048)
+            print(Response.decode('utf-8'))
+    except KeyboardInterrupt:
+        CSocket.close()
+        a = input("Encerrando conexão. Pressione qualquer tecla.")
+        exit()
 
 def enviarMSG(CSocket):
     while True:
-        MSG = input('')
-        VETORMSG = MSG.split(":")
         try:
-            ind = VETORMSG[0].index(Name)
-        except:
-            ind = -1
-        if ind ==  -1 and len(VETORMSG) > 1:
-            CSocket.send(str.encode(MSG))
+            MSG = input('')
+            VETORMSG = MSG.split(":")
+            try:
+                ind = VETORMSG[0].index(Name)
+            except:
+                ind = -1
+            if ind ==  -1 and len(VETORMSG) > 1:
+                CSocket.send(str.encode(MSG))
         else:
             print("Mensagem inválida!")
+        except KeyboardInterrupt:
+            CSocket.close()
+            a = input("Encerrando conexão. Pressione qualquer tecla.")
+            exit()
+
 
 
 
