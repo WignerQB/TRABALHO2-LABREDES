@@ -43,8 +43,8 @@ def InformarConectados(ListaContatos, CONEXOES, IPS):
         CONEXOES[ips].send(str.encode(TEXTO))
 
 
-def clients(Client, IPREM, CONEXOES, IPS, data):
-
+def clients(Client, IPREM, CONEXOES, IPS):
+    global data
     REM = " "
 
     Client.send(str.encode('Conectado!'))
@@ -68,17 +68,23 @@ def clients(Client, IPREM, CONEXOES, IPS, data):
         Mensagem = Mensagem.decode('utf-8')
         with open("conf.json", encoding= 'utf-8') as ConfigFile:
             data = json.load(ConfigFile)
-        if Mensagem == "SAIR":
-            print("SAIU")
-            del data["AddressDest"][REM]
-            print(data["AddressDest"])
-            json_object = json.dumps(data, indent = 4)
-            with open("conf.json", "w") as outfile:
-                outfile.write(json_object)
 
         for i in data['AddressDest']:
             if IPREM == data['AddressDest'][i]:
                 REM = i
+
+        if Mensagem == "SAIR":
+            del data["AddressDest"][REM]
+            json_object = json.dumps(data, indent = 4)
+            with open("conf.json", "w") as outfile:
+                outfile.write(json_object)
+
+            del CONEXOES[IPREM]
+            IPS.remove(IPREM)
+            ListaContatos = []
+            for i in data["AddressDest"]:
+                ListaContatos.append(i)
+            InformarConectados(ListaContatos, CONEXOES, IPS)
 
         try:
             MSG = Mensagem.split(":")
@@ -113,7 +119,7 @@ while True:
         IPS.append(address[0])
         CONTADOR += 1
     print('Número de clientes: ' + str(CONTADOR))
-    start_new_thread(clients, (Client, address[0], CONEXOES, IPS, data, ))
+    start_new_thread(clients, (Client, address[0], CONEXOES, IPS, ))
 
 #ServerSocket.close()
 
