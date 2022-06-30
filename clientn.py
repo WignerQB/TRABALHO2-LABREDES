@@ -3,7 +3,6 @@ import _thread
 import json
 import sys
 import os
-import time
 
 f = open('conf.json','r')
 data = json.load(f)
@@ -12,7 +11,6 @@ PORT = data['Server']["PORT"]
 
 ClientSocket = socket.socket()
 Name = input("Digite o nome do usuário: ")
-print('\nEsperando conexão...')
 try:
     ClientSocket.connect((HOST, PORT))
 except socket.error as e:
@@ -23,10 +21,9 @@ ClientSocket.send(str.encode(Name))
 MyAddress = socket.gethostbyname(socket.gethostname())
 
 
-print("As mensagens devem conter o destinatário no início e a mensagem logo após, com um $ separando")
-print("Exemplo: C1:Ola Mundo!")
-print("Para sair digite: SAIR")
-print("\n\n\n\n")
+print("\nAs mensagens devem conter o destinatário no início e a mensagem logo após, com um : separando")
+print("\nExemplo: C1:Ola Mundo!")
+print("\nPara sair digite: SAIR\n\n")
 
 Response = ClientSocket.recv(2048)
 print(Response.decode('utf-8'))

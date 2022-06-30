@@ -3,5 +3,7 @@
         "HOST": "192.168.124.1",
         "PORT": 1233
     },
-    "AddressDest": {}
+    "AddressDest": {
+        "Wigner": "192.168.124.2"
+    }
 }
