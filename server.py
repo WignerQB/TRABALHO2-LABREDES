@@ -90,7 +90,7 @@ def clients(Client, IPREM, CONEXOES, CLIENTS_CONECTADOS):
                 ListaContatos.append(i)
             InformarConectados(ListaContatos, CONEXOES, CLIENTS_CONECTADOS)
             print(IPREM + ' desconectou!')
-            print('Número de clientes: ' + str(len(CLIENTS_CONECTADOS)))
+            print('Número de clientes: ' + str(len(CLIENTS_CONECTADOS)) + '\n')
 
 
         try:
@@ -124,6 +124,6 @@ while True:
         CLIENTS_CONECTADOS.append(address[0])
         CONEXOES[address[0]] = Client
         ADDRESS.append(address)
-    print('Número de clientes: ' + str(len(CLIENTS_CONECTADOS)))
+    print('Número de clientes: ' + str(len(CLIENTS_CONECTADOS)) + '\n')
     start_new_thread(clients, (Client, address[0], CONEXOES, CLIENTS_CONECTADOS, ))
 
