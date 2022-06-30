@@ -11,14 +11,13 @@ HOST = data['Server']["HOST"]
 PORT = data['Server']["PORT"]
 
 ClientSocket = socket.socket()
-
-print('Waiting for connection')
+Name = input("Digite o nome do usuário: ")
+print('\nEsperando conexão...')
 try:
     ClientSocket.connect((HOST, PORT))
 except socket.error as e:
     print(str(e))
 
-Name = input("Digite o nome do usuário: ")
 ClientSocket.send(str.encode(Name))
 
 MyAddress = socket.gethostbyname(socket.gethostname())
