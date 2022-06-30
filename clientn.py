@@ -10,7 +10,7 @@ HOST = data['Server']["HOST"]
 PORT = data['Server']["PORT"]
 
 ClientSocket = socket.socket()
-Name = input("Digite o nome do usuário: ")
+Name = input("\nDigite o nome do usuário: ")
 try:
     ClientSocket.connect((HOST, PORT))
 except socket.error as e:

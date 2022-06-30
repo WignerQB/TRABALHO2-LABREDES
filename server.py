@@ -34,7 +34,7 @@ try:
 except socket.error as e:
     print(str(e))
 
-print('Conectando...')
+print('\nConectando...\n')
 ServerSocket.listen(2)
 
 
