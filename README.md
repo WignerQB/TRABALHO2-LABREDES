@@ -2,34 +2,7 @@
 
 1) Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
 
-Para instalar no Ubuntu:
-<div></div>
-<code>
-  sudo apt-get update
-</code><div></div>
-<code>
-  sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-</code><div></div><div></div>
-<code>
-  sudo mkdir -p /etc/apt/keyrings
-</code><div></div>
-<code>
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-</code><div></div>
-<code>
-  echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu      \$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-</code><div></div>
-<code>
-  sudo apt-get update
-</code><div></div>
-<code>
-  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-</code>
+Para instalar no Ubuntu-> https://docs.docker.com/engine/install/ubuntu/
 
 Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
 
