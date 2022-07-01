@@ -5,15 +5,14 @@ Desenvolvedores: Ana Carolina Carvalho Cassiano e José Wigner Quintino Bindacco
 Professor: Dr. Alexandre Pereira do Carmo
 <div></div>
 Disciplina de Laboratório de Redes
-<div></div>
+<br>
+<br>
 
-<p>
 1) Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
 
 Para instalar no Ubuntu-> https://docs.docker.com/engine/install/ubuntu/
 
 Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
-</p>
 
 
 2) Para rodar a aplicação, execute os comandos na sequêcnia e informe o endereço do servidor:
