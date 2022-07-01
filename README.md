@@ -12,7 +12,7 @@ Para instalar no Ubuntu:
     curl \
     gnupg \
     lsb-release
-</code><div></div>
+</code><div></div><div></div>
 <code>
   sudo mkdir -p /etc/apt/keyrings
 </code><div></div>
