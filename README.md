@@ -14,6 +14,8 @@ Para instalar no Ubuntu-> https://docs.docker.com/engine/install/ubuntu/
 
 Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
 
+<br>
+<br>
 
 2) Para rodar a aplicação, execute os comandos na sequêcnia e informe o endereço do servidor:
 
