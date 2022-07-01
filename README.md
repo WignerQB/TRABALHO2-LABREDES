@@ -7,14 +7,14 @@ Para Ubuntu-> https://www.digitalocean.com/community/tutorials/how-to-install-an
 Para Windows-> https://docs.docker.com/desktop/windows/install/
 
 
-2) Para rodar a aplicação, execute os comandos na sequêcnia:
+2) Para rodar a aplicação, execute os comandos na sequêcnia e informe o endereço do servidor:
 
 <code>
   sudo docker run -it --rm --network=host josewigner1999/servertrabalho2:server
 </code>
 <div></div>
 <code>
-  sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client python3 clientn.py 192.168.124.1
+  sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client python3 clientn.py <endereço do servidor>
 </code>
 
 
