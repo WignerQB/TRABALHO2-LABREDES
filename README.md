@@ -25,3 +25,5 @@ Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
 <code>
   sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client python3 clientn.py <i>endereço do servidor</i>
 </code>
+
+3. Para sair do programa <i>clientn.py</i> digite "SAIR".
