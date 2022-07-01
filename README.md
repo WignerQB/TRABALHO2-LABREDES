@@ -8,7 +8,7 @@ Disciplina de Laboratório de Redes
 <br>
 <br>
 
-1) Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
+1 Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
 
 Para instalar no Ubuntu-> https://docs.docker.com/engine/install/ubuntu/
 
@@ -16,7 +16,7 @@ Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
 
 <br>
 
-2) Para rodar a aplicação, execute os comandos na sequêcnia e informe o endereço do servidor:
+2 Para rodar a aplicação, execute os comandos na sequêcnia e informe o endereço do servidor:
 
 <code>
   sudo docker run -it --rm --network=host josewigner1999/servertrabalho2:server python3 server.py <i>endereço do servidor</i>
