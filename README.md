@@ -1,5 +1,7 @@
 # TRABALHO2-LABREDES
 
+Desenvolvedores: Ana Carolina Carvalho Cassiano e José Wigner Quintino Bindacco
+
 1) Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
 
 Para instalar no Ubuntu-> https://docs.docker.com/engine/install/ubuntu/
