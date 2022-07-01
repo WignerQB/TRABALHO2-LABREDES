@@ -10,12 +10,9 @@ Para Windows-> https://docs.docker.com/desktop/windows/install/
 2) Para rodar a aplicação, execute os comandos na sequêcnia e informe o endereço do servidor:
 
 <code>
-  sudo docker run -it --rm --network=host josewigner1999/servertrabalho2:server python3 server.py "endereço do servidor"
+  sudo docker run -it --rm --network=host josewigner1999/servertrabalho2:server python3 server.py <i>endereço do servidor</i>
 </code>
 <div></div>
 <code>
-  sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client python3 clientn.py "endereço do servidor"
+  sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client python3 clientn.py <i>endereço do servidor</i>
 </code>
-
-
-3) 
