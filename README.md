@@ -12,7 +12,7 @@ Para Windows-> https://docs.docker.com/desktop/windows/install/
 <code>
   sudo docker run -it --rm --network=host josewigner1999/servertrabalho2:server
 </code>
-
+<div></div>
 <code>
   sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client
 </code>
