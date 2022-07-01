@@ -15,7 +15,7 @@ MyAddress = socket.gethostbyname(socket.gethostname())
 
 f = open('conf.json','r')
 data = json.load(f)
-HOST = data['Server']["HOST"]
+HOST = sys.argv[1]
 PORT = data['Server']["PORT"]
 
 data["AddressDest"] = {}
@@ -114,7 +114,7 @@ while True:
     Client, address = ServerSocket.accept()
     print('Conectado em: ' + address[0])
 
-    HOST = data['Server']["HOST"]
+    HOST = sys.argv[1]
 
     try:
         ind = CLIENTS_CONECTADOS.index(address[0])
