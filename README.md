@@ -1,6 +1,9 @@
 # TRABALHO2-LABREDES
 
 Desenvolvedores: Ana Carolina Carvalho Cassiano e José Wigner Quintino Bindacco
+Professor: Dr. Alexandre Pereira do Carmo
+Disciplina de Laboratório de Redes
+
 
 1) Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
 
