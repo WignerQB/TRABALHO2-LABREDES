@@ -13,6 +13,7 @@ sudo docker build -t josewigner1999/
 3) Para rodar o container:
 
 sudo docker run -it --rm --network=host josewigner1999/servertrabalho2:server
+
 sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client
 
 
