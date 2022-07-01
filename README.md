@@ -14,7 +14,7 @@ Para Windows-> https://docs.docker.com/desktop/windows/install/
 </code>
 <div></div>
 <code>
-  sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client
+  sudo docker run -it --rm --network=host josewigner1999/clienttrabalho2:client python3 clientn.py 192.168.124.1
 </code>
 
 
