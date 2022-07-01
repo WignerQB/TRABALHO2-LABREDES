@@ -6,8 +6,8 @@ import os
 
 f = open('conf.json','r')
 data = json.load(f)
-HOST = data['Server']["HOST"]
 PORT = data['Server']["PORT"]
+HOST = sys.argv[1]
 
 ClientSocket = socket.socket()
 Name = input("\nDigite o nome do usuário: ")
