@@ -3,6 +3,7 @@
 1) Verifique se o Docker já está instalado na sua máquina. Caso não esteja, acesse:
 
 Para instalar no Ubuntu:
+<div></div>
 <code>
   sudo apt-get update
 </code><div></div>
