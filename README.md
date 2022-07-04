@@ -36,4 +36,4 @@ Exemplo:
 Alexandre: Esse trabalho 2 está muito bom, merece nota máxima!
 <br>
 <br>
-4. Para sair do programa <i>clientn.py</i> digite "SAIR".
+  4. Para sair do programa <i>clientn.py</i> digite "SAIR".
