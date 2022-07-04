@@ -29,9 +29,7 @@ Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
 <br>
 <br>
 
-3. Para enviar uma mensagem, é necessário seguir o seguinte padrão:
-<br>
-{Destinatário}: {Mensagem}
+3. Para enviar uma mensagem, é necessário seguir o seguinte padrão: {Destinatário}: {Mensagem}
 <br>
 Exemplo: 
 <br>
