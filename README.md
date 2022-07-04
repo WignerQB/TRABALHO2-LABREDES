@@ -29,4 +29,9 @@ Para instalar no Windows-> https://docs.docker.com/desktop/windows/install/
 <br>
 <br>
 
-3. Para sair do programa <i>clientn.py</i> digite "SAIR".
+3. Para enviar uma mensagem, é necessário seguir o seguinte padrão:
+{Destinatário}: {Mensagem}
+Exemplo: 
+Alexandre: Esse trabalho 2 está muito bom, merece nota máxima!
+<br>
+4. Para sair do programa <i>clientn.py</i> digite "SAIR".
